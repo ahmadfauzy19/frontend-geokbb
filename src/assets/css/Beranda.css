@@ -1,0 +1,379 @@
+/* ================= HERO SECTION ================= */
+.hero {
+  position: relative;
+  min-height: 420px;
+  background-image: url('../../../public/background_peta.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: saturate(0.95);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  pointer-events: none;
+}
+
+/* ================= HERO CONTENT ================= */
+.hero-content {
+  padding: 10px;
+  position: relative;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding-top: 200px;
+  z-index: 1;
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.hero-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 200px;
+}
+
+/* ================= HERO TEXT ================= */
+.hero-text {
+  flex: 1;
+  text-align: left;
+}
+
+.hero-text h2 {
+  font-size: 3.5em;
+  margin: 0 0 16px 0;
+}
+
+.hero-text p {
+  font-size: 1.5em;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+}
+
+/* ================= HERO IMAGE ================= */
+.hero-image img {
+  width: 450px;
+  max-width: 100%;
+}
+
+/* ================= HERO ACTION ================= */
+.hero-action {
+  display: flex;
+  justify-content: center;
+  width: 230px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+/* ================= MAP OVERVIEW ================= */
+.map-overview {
+  width: 1200px;
+  height: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ================= BASEMAP SWITCHER ================= */
+.basemap-switcher {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.basemap-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 50px;
+  height: 50px;
+}
+
+.basemap-toggle:hover {
+  border-color: #346cff;
+  background: #f0f5ff;
+}
+
+.basemap-toggle img {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.basemap-toggle .active-name {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #333;
+  margin-left: 4px;
+}
+
+/* ================= BASEMAP OPTIONS ================= */
+.basemap-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.3s ease;
+  max-width: 100%;
+}
+
+.basemap-options button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.basemap-options img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.basemap-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid #d9d9d9;
+  border-radius: 6px;
+  padding: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 80px;
+}
+
+.basemap-option:hover {
+  border-color: #346cff;
+  background: #f0f5ff;
+}
+
+.basemap-option.active {
+  border-color: #346cff;
+  background: #346cff;
+  color: white;
+}
+
+.basemap-option img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE TABLET (768px) ================= */
+@media (max-width: 768px) {
+  /* Hero Section */
+  .hero-content {
+    padding-top: 120px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .hero-text h2 {
+    font-size: 2em;
+  }
+
+  .hero-text p {
+    font-size: 1.1em;
+  }
+
+  .hero-image img {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .hero-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Map Overview */
+  .map-overview {
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+  }
+
+  /* Basemap Switcher */
+  .basemap-switcher {
+    top: 16px;
+    right: 16px;
+    gap: 4px;
+  }
+
+  .basemap-toggle {
+    width: 44px;
+    height: 44px;
+    padding: 6px 10px;
+  }
+
+  .basemap-toggle img {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Basemap Options - Responsive Layout */
+  .basemap-options {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px;
+    max-width: 250px;
+  }
+
+  .basemap-option {
+    min-width: 50px;
+    font-size: 11px;
+    padding: 6px;
+    flex: 1 1 auto;
+  }
+
+  .basemap-option img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ================= RESPONSIVE MOBILE (480px) ================= */
+@media (max-width: 480px) {
+  /* Hero Section */
+  .hero {
+    min-height: 300px;
+  }
+
+  .hero-content {
+    padding-top: 80px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .hero-text h2 {
+    font-size: 1.5em;
+  }
+
+  .hero-text p {
+    font-size: 0.95em;
+  }
+
+  .hero-image img {
+    max-width: 200px;
+  }
+
+  /* Map Overview */
+  .map-overview {
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+    margin: 0 12px;
+    width: calc(100% - 24px);
+  }
+
+  /* Basemap Switcher */
+  .basemap-switcher {
+    top: 12px;
+    right: 12px;
+    gap: 2px;
+  }
+
+  .basemap-toggle {
+    width: 40px;
+    height: 40px;
+    padding: 4px 8px;
+  }
+
+  .basemap-toggle img {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Basemap Options - Mobile Stack */
+  .basemap-options {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 6px;
+    max-width: 220px;
+    right: 0;
+  }
+
+  .basemap-option {
+    min-width: 45px;
+    font-size: 10px;
+    padding: 4px;
+    flex: 0 0 45px;
+  }
+
+  .basemap-option img {
+    width: 28px;
+    height: 28px;
+  }
+}
