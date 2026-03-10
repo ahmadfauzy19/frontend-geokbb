@@ -23,14 +23,16 @@ const KBB_BOUNDS = L.latLngBounds(
 
 interface Props {
   activeLayers: string[];
+  searchResult?: any;
 }
 
-const Map = ({ activeLayers }: Props) => {
+const Map = ({ activeLayers, searchResult }: Props) => {
   const mapRef = useRef<L.Map | null>(null);
   const basemapLayerRef = useRef<L.TileLayer | null>(null);
   const wmsLayersRef = useRef<Record<string, L.TileLayer.WMS>>({});
   const wfsLayersRef = useRef<Record<string, L.GeoJSON>>({});
   const interactiveWMSRef = useRef<L.TileLayer.WMS[]>([]);
+  const searchLayerRef = useRef<L.GeoJSON | null>(null);
 
 
   const [basemap, setBasemap] = useState<BasemapKey>('osm');
@@ -137,6 +139,37 @@ const Map = ({ activeLayers }: Props) => {
     basemapLayerRef.current.addTo(mapRef.current);
     basemapLayerRef.current.bringToBack();
   }, [basemap]);
+
+  useEffect(() => {
+    if (!mapRef.current || !searchResult) return;
+
+    const map = mapRef.current;
+
+    // hapus layer lama
+    if (searchLayerRef.current) {
+      map.removeLayer(searchLayerRef.current);
+    }
+
+    const layer = L.geoJSON(searchResult, {
+      style: {
+        color: "#00ffff",
+        weight: 3
+      },
+      pointToLayer: (_, latlng) =>
+        L.circleMarker(latlng, {
+          radius: 8,
+          fillColor: "#00ffff",
+          color: "#000",
+          weight: 1,
+          fillOpacity: 0.9
+        }),
+    }).addTo(map);
+
+    map.fitBounds(layer.getBounds(), { padding: [40, 40] });
+
+    searchLayerRef.current = layer;
+
+  }, [searchResult]);
 
   /* ================= WMS LAYERS (MAPSET) ================= */
   useEffect(() => {

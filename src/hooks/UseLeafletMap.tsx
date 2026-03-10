@@ -27,7 +27,7 @@ export const useLeafletMap = (
       leafletMap.fitBounds(KBB_BOUNDS);
 
       mapRef.current = leafletMap;
-      setMap(leafletMap); // ⬅️ INI KUNCINYA
+      setMap(leafletMap);
       
     }
   }, [mapId]);

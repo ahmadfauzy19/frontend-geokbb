@@ -45,13 +45,13 @@ export const ICONS = {
   }),
   terminal_bus: L.icon({
     iconUrl: '/icon_terminal_bus.png',   
-    iconSize: [26, 26],
+    iconSize: [35, 26],
     iconAnchor: [13, 13],
     popupAnchor: [0, -13],
   }),
   stasiun_kereta_api: L.icon({
     iconUrl: '/icon_stasiun_kereta_api.png',   
-    iconSize: [50, 50],
+    iconSize: [26, 26],
     iconAnchor: [13, 13],
     popupAnchor: [0, -13],
   }),
