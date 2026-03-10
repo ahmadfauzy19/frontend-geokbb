@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, Menu } from 'antd';
 import '../assets/css/Layout.css';
 const { Header, Content, Footer } = Layout;
 
