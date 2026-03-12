@@ -11,6 +11,12 @@ export const WMS_LAYERS = {
     layers: 'digispatia:batas_kecamatan',
     interactive: true,
   },
+  batas_kecamatan_overview: {
+    title: 'Batas Kecamatan Kabupaten Bandung Barat',
+    url: 'http://localhost:8080/geoserver/digispatia/wms',
+    layers: 'digispatia:batas_kecamatan_overview',
+    interactive: true,
+  },
   batas_kabupaten: {
     title: 'Batas Kabupaten Bandung Barat',
     url: 'http://localhost:8080/geoserver/digispatia/wms',

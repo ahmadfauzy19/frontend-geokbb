@@ -1,54 +1,78 @@
 import { useState } from 'react';
-import { BASEMAPS, type BasemapKey } from '../config/BaseMaps';
+import L from 'leaflet';
+// import { BASEMAPS, type BasemapKey } from '../config/BaseMaps';
 import { useLeafletMap } from '../hooks/UseLeafletMap';
 import { useWmsLayers } from '../hooks/UseWmsLayers';
 import 'leaflet/dist/leaflet.css';
 import '../assets/css/Beranda.css';
 
-const MapOverview = () => {
-  const [basemap, setBasemap] = useState<BasemapKey>('osm');
-  const [open, setOpen] = useState(false);
+const BIGGER_BOUNDS = L.latLngBounds([
+  [-7.29, 107.10],
+  [-6.52, 107.85],
+]);
 
-  /* aktifkan layer apa saja */
+const overviewData = {
+  luasWilayah: '829.128 km²',
+  jumlahPenduduk: '129.238 jiwa',
+  jumlahKecamatan: 16,
+  jumlahDesa: 165,
+};
+
+const MapOverview = () => {
+  // const [basemap] = useState<BasemapKey>('osm');
+
   const [activeLayers] = useState<string[]>([
-    'batas_kecamatan',
+    'batas_kecamatan_overview',
   ]);
 
-  const mapRef = useLeafletMap('map', basemap);
+  const mapRef = useLeafletMap('map', null, BIGGER_BOUNDS);
   useWmsLayers(mapRef.current, activeLayers);
 
   return (
-    <>
-      <div id="map" style={{ width: '100%', height: '100%' }} />
+    <div className="overview-container">
+      <div
+        id="map"
+        style={{
+          width: '100%',
+          height: '100%',
+          background: 'transparent'
+        }}
+      />
 
-      {/* BASEMAP SWITCHER */}
-      <div className={`basemap-switcher ${open ? 'open' : ''}`}>
-        <button
-          className="basemap-toggle"
-          onClick={() => setOpen(!open)}
-        >
-          <img src={BASEMAPS[basemap].image} />
-        </button>
-
-        {open && (
-          <div className="basemap-options">
-            {Object.entries(BASEMAPS).map(([key, val]) => (
-              <button
-                key={key}
-                className={basemap === key ? 'active' : ''}
-                onClick={() => {
-                  setBasemap(key as BasemapKey);
-                  setOpen(false);
-                }}
-              >
-                <img src={val.image} />
-                <span>{val.name}</span>
-              </button>
-            ))}
+      {/* LEFT INFO */}
+      <div className="info-left">
+        <div className="box-info"> 
+          <span>Luas Wilayah</span>
+          <div className="info-box green">
+            <h3>{overviewData.luasWilayah}</h3>
           </div>
-        )}
+        </div>
+        <div className="box-info">
+          <span>Jumlah Penduduk</span>
+          <div className="info-box blue">
+            <h3>{overviewData.jumlahPenduduk}</h3>
+          </div>
+        </div>
       </div>
-    </>
+
+      {/* RIGHT INFO */}
+      <div className="info-right">
+        <div className="box-info"> 
+          <span>Jumlah Kecamatan</span>
+          <div className="info-box green">
+            <h3>{overviewData.jumlahKecamatan} Kecamatan</h3>
+          </div>
+        </div>
+
+        <div className="box-info">
+          <span>Jumlah Desa/Kelurahan</span>
+          <div className="info-box blue">
+            <h3>{overviewData.jumlahDesa} Desa/Kel</h3>
+          </div>
+        </div>
+      </div>
+
+    </div>
   );
 };
 

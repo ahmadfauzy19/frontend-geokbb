@@ -1,8 +1,10 @@
 import AppLayout from "../layout/Layout";
 import '../assets/css/Beranda.css';
 import MapOverview from "../component/MapOverview";
+import { useNavigate } from "react-router-dom";
 
 const Beranda = () => {
+    const navigate = useNavigate();
     return (
         <AppLayout>
             <div className="beranda">
@@ -32,7 +34,7 @@ const Beranda = () => {
 
                             {/* BARIS BAWAH: button */}
                             <div className="hero-action">
-                                <button className="btn-primary" style={{ backgroundColor: '#346CFF' }}>
+                                <button className="btn-primary" style={{ backgroundColor: '#346CFF' }} onClick={() => navigate("/mapset")}>
                                     Jelajahi Peta Interaktif
                                 </button>
                             </div>

@@ -2,7 +2,7 @@
 .hero {
   position: relative;
   min-height: 420px;
-  background-image: url('../../../public/background_peta.png');
+  background-image: url('/background_peta.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -87,13 +87,69 @@
 
 /* ================= MAP OVERVIEW ================= */
 .map-overview {
-  width: 1200px;
-  height: 600px;
+  width: 1000px;
+  height: 650px;
   border-radius: 12px;
   overflow: hidden;
   align-items: center;
   margin: 0 auto;
   position: relative;
+}
+
+.overview-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.info-left {
+  position: absolute;
+  left: 40px;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  z-index: 1010;
+}
+
+.info-right {
+  position: absolute;
+  right: 120px;
+  top: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  z-index: 1000;
+}
+
+.info-box {
+  padding: 2px 7px;
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.info-box span {
+  font-size: 14px;
+}
+
+.info-box h3 {
+  margin: 0 0 0 0;
+  font-size: 18px;
+}
+
+.green {
+  background: #35c38a;
+}
+
+.blue {
+  background: #3ca2c2;
+}
+
+.box-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* jarak antara label dan box */
 }
 
 /* ================= BASEMAP SWITCHER ================= */

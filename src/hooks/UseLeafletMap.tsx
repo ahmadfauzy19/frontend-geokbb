@@ -10,7 +10,8 @@ const KBB_BOUNDS = L.latLngBounds(
 
 export const useLeafletMap = (
   mapId: string,
-  basemap: BasemapKey
+  basemap: BasemapKey | null,
+  bbox?: L.LatLngBoundsExpression | null
 ) => {
   const mapRef = useRef<L.Map | null>(null);
   const basemapRef = useRef<L.TileLayer | null>(null);
@@ -23,8 +24,12 @@ export const useLeafletMap = (
       const leafletMap = L.map(mapId, {
         zoomControl: false,
       });
+      const bounds = bbox ?? KBB_BOUNDS;
 
-      leafletMap.fitBounds(KBB_BOUNDS);
+      leafletMap.fitBounds(bounds);
+
+      /* zoom lebih dekat supaya polygon lebih besar */
+      leafletMap.setZoom(leafletMap.getZoom() + 1);
 
       mapRef.current = leafletMap;
       setMap(leafletMap);
@@ -38,7 +43,11 @@ export const useLeafletMap = (
 
     if (basemapRef.current) {
         map.removeLayer(basemapRef.current);
+        basemapRef.current = null;
     }
+
+    /* jika null → map putih */
+    if (!basemap) return;
 
     const cfg = BASEMAPS[basemap];
 

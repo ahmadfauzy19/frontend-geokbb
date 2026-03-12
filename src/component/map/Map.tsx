@@ -12,8 +12,6 @@ import { BASEMAPS, type BasemapKey } from '../../config/BaseMaps';
 /* ===== IMPORT LAYER MANAGER ===== */
 import { syncWMSLayers, syncWFSLayers } from './layers';
 
-import { getWMSFeatureInfo } from './getFeatureInfo';
-
 /* BBOX KBB */
 const KBB_BOUNDS = L.latLngBounds(
   [-7.107184410095215, 107.18193054199219],
@@ -33,6 +31,7 @@ const Map = ({ activeLayers, searchResult }: Props) => {
   const wfsLayersRef = useRef<Record<string, L.GeoJSON>>({});
   const interactiveWMSRef = useRef<L.TileLayer.WMS[]>([]);
   const searchLayerRef = useRef<L.GeoJSON | null>(null);
+  const wfsGroupRef = useRef<L.LayerGroup | null>(null);
 
 
   const [basemap, setBasemap] = useState<BasemapKey>('osm');
@@ -49,6 +48,9 @@ const Map = ({ activeLayers, searchResult }: Props) => {
       map.fitBounds(KBB_BOUNDS);
 
       mapRef.current = map;
+
+      /* GROUP UNTUK WFS */
+    wfsGroupRef.current = L.layerGroup().addTo(map);
 
       /* ===== LAT LNG ===== */
       class LatLngControl extends L.Control {
@@ -186,95 +188,24 @@ const Map = ({ activeLayers, searchResult }: Props) => {
   /* ================= WFS LAYERS ================= */
 
   useEffect(() => {
-  if (!mapRef.current) return;
+  const map = mapRef.current;
+  const group = wfsGroupRef.current;
+
+  if (!map || !group) return;
 
     syncWFSLayers(
-      mapRef.current,
+      // map,
       activeLayers,
-      wfsLayersRef.current
+      wfsLayersRef.current,
+      group
     );
   }, [activeLayers]);
-  
-// ================= click =================
-  useEffect(() => {
-    if (!mapRef.current) {
-      return;
-    }
-
-    const map = mapRef.current;
-
-    const onClick = async (e: L.LeafletMouseEvent) => {
-      for (const layer of interactiveWMSRef.current) {
-        const data = await getWMSFeatureInfo({
-          map,
-          layer,
-          latlng: e.latlng,
-        });
-
-        const feature = data.features?.[0];
-        if (feature?.properties?.namobj) {
-          L.popup()
-            .setLatLng(e.latlng)
-            .setContent(`<strong>${feature.properties.namobj}</strong>`)
-            .openOn(map);
-          return;
-        }
-      }
-    };
-
-    map.on('click', onClick);
-
-    return () => {
-      map.off('click', onClick);
-    };
-  }, []);
-
-
-  // ================ hover =================
-
-  useEffect(() => {
-    if (!mapRef.current) return;
-    const map = mapRef.current;
-
-    const tooltip = L.tooltip({
-      sticky: true,
-      direction: 'top',
-    });
-
-    const onMove = async (e: L.LeafletMouseEvent) => {
-      for (const layer of interactiveWMSRef.current) {
-        const data = await getWMSFeatureInfo({
-          map,
-          layer,
-          latlng: e.latlng,
-        });
-
-        const feature = data.features?.[0];
-        if (feature?.properties?.namobj) {
-          tooltip
-            .setLatLng(e.latlng)
-            .setContent(feature.properties.namobj);
-
-          tooltip.addTo(map);
-          return;
-        }
-      }
-      map.removeLayer(tooltip);
-    };
-
-    map.on('mousemove', onMove);
-    return () => {
-      map.off('mousemove', onMove);
-    };
-  }, []);
-
-
 
   return (
     <>
       <div id="map" style={{ height: '100%', width: '100%' }} />
 
-      {/* ===== BASEMAP PANEL (TIDAK DIUBAH) ===== */}
+      {/* ===== BASEMAP PANEL ===== */}
       <div className="basemap-panel">
         <div className="basemap-title">Basemap</div>
         <div className="basemap-list">

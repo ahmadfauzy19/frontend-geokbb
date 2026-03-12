@@ -57,5 +57,40 @@ export const WFS_LAYERS = {
         typeName: 'digispatia:pembangkit_listrik',
         pointToLayer : (_: any, latlng: L.LatLng) =>
             L.marker(latlng, { icon: ICONS.pembangkit_listrik }),
-    },  
+    },
+    batas_desa: {
+        title: 'Batas Desa',
+        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        typeName: 'digispatia:batas_desa',
+
+        style: {
+            color: 'transparent',
+            weight: 1,
+            fillOpacity: 0
+        }
+    },
+
+    batas_kecamatan: {
+        title: 'Batas Kecamatan',
+        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        typeName: 'digispatia:batas_kecamatan',
+
+        style: {
+            color: 'transparent',
+            weight: 1,
+            fillOpacity: 0
+        }
+    },
+
+    batas_kabupaten: {
+        title: 'Batas Kabupaten',
+        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        typeName: 'digispatia:batas_kabupaten',
+
+        style: {
+            color: 'transparent',
+            weight: 1,
+            fillOpacity: 0
+        }
+    }
 }

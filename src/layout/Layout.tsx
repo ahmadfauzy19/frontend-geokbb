@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, FloatButton  } from 'antd';
 import '../assets/css/Layout.css';
+import { MailOutlined, ArrowUpOutlined } from '@ant-design/icons';
 const { Header, Content, Footer } = Layout;
 
 const menuItems = [
@@ -88,7 +89,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
           </div>
 
           {/* FLOATING ACTION */}
-          <div className="footer-fab">
+          {/* <div className="footer-fab">
             <button
               className="fab email"
               onClick={() => {
@@ -104,7 +105,23 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                 });
               }}
             ></button>
-          </div>
+          </div> */}
+          <FloatButton.Group shape="circle" style={{ right: 24 }}>
+            <FloatButton
+              icon={<MailOutlined style={{ color: 'white' }}/>}
+              tooltip="Email DigiSpatia"
+              style={{background: "#ff9800"}}
+              onClick={() => {
+                window.location.href = 'mailto:digispatia@gmail.com';
+              }}
+            />
+
+            <FloatButton.BackTop
+              style={{ background: '#2f6bff' }}
+              icon={<ArrowUpOutlined style={{ color: 'white' }}/>}
+              tooltip="Kembali ke atas"
+            />
+          </FloatButton.Group>
         </Footer>
 
       </Layout>
