@@ -84,74 +84,6 @@
   margin-top: 20px;
   margin-bottom: 30px;
 }
-
-/* ================= MAP OVERVIEW ================= */
-.map-overview {
-  width: 1000px;
-  height: 650px;
-  border-radius: 12px;
-  overflow: hidden;
-  align-items: center;
-  margin: 0 auto;
-  position: relative;
-}
-
-.overview-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.info-left {
-  position: absolute;
-  left: 40px;
-  top: 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  z-index: 1010;
-}
-
-.info-right {
-  position: absolute;
-  right: 120px;
-  top: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  z-index: 1000;
-}
-
-.info-box {
-  padding: 2px 7px;
-  border-radius: 20px;
-  color: white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-.info-box span {
-  font-size: 14px;
-}
-
-.info-box h3 {
-  margin: 0 0 0 0;
-  font-size: 18px;
-}
-
-.green {
-  background: #35c38a;
-}
-
-.blue {
-  background: #3ca2c2;
-}
-
-.box-info {
-  display: flex;
-  flex-direction: column;
-  gap: 8px; /* jarak antara label dan box */
-}
-
 /* ================= BASEMAP SWITCHER ================= */
 .basemap-switcher {
   position: absolute;
@@ -260,6 +192,83 @@
   height: 40px;
   border-radius: 4px;
   object-fit: cover;
+}
+
+/* ================= HERO ANIMATION ================= */
+
+.hero-text {
+  animation: fadeUp 1s ease;
+}
+
+.hero-image img {
+  animation: floatImage 4s ease-in-out infinite;
+}
+
+.hero-action {
+  animation: fadeUp 1.2s ease;
+}
+
+/* BUTTON MODERN */
+
+.btn-primary {
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+
+  background: linear-gradient(135deg,#346cff,#5a8dff);
+
+  box-shadow: 0 10px 20px rgba(52,108,255,0.3);
+
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 26px rgba(52,108,255,0.4);
+}
+
+/* HERO SECTION 2 */
+
+.hero-section-2 {
+  margin-top: 120px;
+  text-align: center;
+}
+
+.hero-section-2 h1 {
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+/* ================= KEYFRAMES ================= */
+
+@keyframes fadeUp {
+  from {
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes floatImage {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 /* ================= ANIMATIONS ================= */

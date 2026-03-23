@@ -5,6 +5,12 @@ export const WMS_LAYERS = {
     layers: 'digispatia:batas_desa',
     interactive: true,
   },
+  batas_desa_overview: {
+    title: 'Batas Desa Kabupaten Bandung Barat',
+    url: 'http://localhost:8080/geoserver/digispatia/wms',
+    layers: 'digispatia:batas_desa_overview',
+    interactive: true,
+  },
   batas_kecamatan: {
     title: 'Batas Kecamatan Kabupaten Bandung Barat',
     url: 'http://localhost:8080/geoserver/digispatia/wms',
@@ -21,6 +27,12 @@ export const WMS_LAYERS = {
     title: 'Batas Kabupaten Bandung Barat',
     url: 'http://localhost:8080/geoserver/digispatia/wms',
     layers: 'digispatia:batas_kabupaten',
+    interactive: false,
+  },
+  batas_kabupaten_overview: {
+    title: 'Batas Kabupaten Bandung Barat',
+    url: 'http://localhost:8080/geoserver/digispatia/wms',
+    layers: 'digispatia:batas_kabupaten_overview',
     interactive: false,
   },
   guna_lahan: {
@@ -45,6 +57,12 @@ export const WMS_LAYERS = {
     title: 'Jaringan Listrik',
     url: 'http://localhost:8080/geoserver/digispatia/wms',
     layers: 'digispatia:jaringan_listrik',
+    interactive: false,
+  },
+  kepadatan_penduduk: {
+    title: 'Kepadatan Penduduk',
+    url: 'http://localhost:8080/geoserver/digispatia/wms',
+    layers: 'digispatia:kepadatan_penduduk',
     interactive: false,
   },
 };

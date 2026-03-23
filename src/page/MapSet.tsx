@@ -12,6 +12,7 @@ const MapSet = () => {
   const [selectedResult, setSelectedResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [mapsetOpen, setMapsetOpen] = useState(false);
 
   useEffect(() => {
     if (!searchQuery) {
@@ -48,55 +49,82 @@ const MapSet = () => {
 
   return (
     <div className="mapset-container">
-      {/* SEARCH FLOATING */}
-      <div className="search-floating">
-        <input
-          className="search-input"
-          placeholder="Cari Lokasi"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+      {/* MAP TOOLBAR */}
+      <div className="map-toolbar">
 
-        <button className="search-btn">
-          <SearchOutlined />
-        </button>
+        {/* SEARCH */}
+        <div className="search-floating">
+          <input
+            className="search-input"
+            placeholder="Cari Lokasi"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
-        {searchQuery && (
-          <div className="search-dropdown">
+          <button className="search-btn">
+            <SearchOutlined />
+          </button>
 
-            {loading && (
-              <div className="search-item loading">
-                🔄 Mencari...
-              </div>
-            )}
+          {searchQuery && (
+            <div className="search-dropdown">
 
-            {!loading && suggestions.length === 0 && (
-              <div className="search-item empty">
-                ❌ Tidak ditemukan
-              </div>
-            )}
-
-            {!loading &&
-              suggestions.map((item, idx) => (
-                <div
-                  key={idx}
-                  className={`search-item ${activeIndex === idx ? "active" : ""}`}
-                  onClick={() => {
-                    setActiveIndex(idx);
-                    setSelectedResult({
-                      type: "FeatureCollection",
-                      features: [item]
-                    });
-                  }}
-                >
-                  {item.properties.name}
-                  <span className="source-tag">
-                    {item.properties.source_table}
-                  </span>
+              {loading && (
+                <div className="search-item loading">
+                  🔄 Mencari...
                 </div>
-              ))}
-          </div>
-        )}
+              )}
+
+              {!loading && suggestions.length === 0 && (
+                <div className="search-item empty">
+                  ❌ Tidak ditemukan
+                </div>
+              )}
+
+              {!loading &&
+                suggestions.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className={`search-item ${activeIndex === idx ? "active" : ""}`}
+                    onClick={() => {
+                      setActiveIndex(idx);
+                      setSelectedResult({
+                        type: "FeatureCollection",
+                        features: [item]
+                      });
+                    }}
+                  >
+                    {item.properties.name}
+                    <span className="source-tag">
+                      {item.properties.source_table}
+                    </span>
+                  </div>
+                ))}
+            </div>
+          )}
+        </div>
+
+        {/* MAPSET BUTTON */}
+        <div className="mapset-mobile">
+          <button
+            className="mapset-mobile-btn"
+            onClick={() => setMapsetOpen(!mapsetOpen)}
+          >
+            Pilih Mapset
+          </button>
+
+          {mapsetOpen && (
+            <div className="mapset-dropdown">
+              <MapsetSidebar
+                activeLayers={activeLayers}
+                toggleLayer={(id) => {
+                  toggleLayer(id);
+                  setMapsetOpen(false);
+                }}
+              />
+            </div>
+          )}
+        </div>
+
       </div>
 
       {/* SIDEBAR */}

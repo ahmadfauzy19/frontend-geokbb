@@ -23,7 +23,16 @@ export const useLeafletMap = (
     if (!mapRef.current) {
       const leafletMap = L.map(mapId, {
         zoomControl: false,
+
+        // 🔒 LOCK INTERACTION
+        dragging: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        touchZoom: false,
       });
+
       const bounds = bbox ?? KBB_BOUNDS;
 
       leafletMap.fitBounds(bounds);
@@ -33,7 +42,6 @@ export const useLeafletMap = (
 
       mapRef.current = leafletMap;
       setMap(leafletMap);
-      
     }
   }, [mapId]);
 
@@ -42,8 +50,8 @@ export const useLeafletMap = (
     if (!map) return;
 
     if (basemapRef.current) {
-        map.removeLayer(basemapRef.current);
-        basemapRef.current = null;
+      map.removeLayer(basemapRef.current);
+      basemapRef.current = null;
     }
 
     /* jika null → map putih */
@@ -52,14 +60,14 @@ export const useLeafletMap = (
     const cfg = BASEMAPS[basemap];
 
     basemapRef.current = L.tileLayer(
-        cfg.url,
-        cfg.options
+      cfg.url,
+      cfg.options
     );
 
     basemapRef.current.addTo(map);
     basemapRef.current.bringToBack();
 
-}, [map, basemap]);
+  }, [map, basemap]);
 
   return mapRef;
 };
