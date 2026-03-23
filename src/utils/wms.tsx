@@ -8,7 +8,6 @@ export function syncWMSLayers(
   interactiveWMSRef: L.TileLayer.WMS[]
 ) {
   /* ADD */
-  console.log("wms layesr:", activeLayers)
   activeLayers.forEach((id) => {
     if (!layerStore[id] && WMS_LAYERS[id as keyof typeof WMS_LAYERS]) {
       const cfg = WMS_LAYERS[id as keyof typeof WMS_LAYERS];

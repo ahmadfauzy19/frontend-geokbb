@@ -17,17 +17,6 @@ interface AppLayoutProps {
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  // const {
-  //   token: { colorBgContainer, borderRadiusLG },
-  // } = theme.useToken();
-
-  // enerate bradcrumb item
-  // const breadcrumbItems = [
-  //   { title: 'Home' },
-  //   { 
-  //     title: menuItems.find(item => item.key === location.pathname)?.label || 'Beranda' 
-  //   }
-  // ];
 
   return (
     <>

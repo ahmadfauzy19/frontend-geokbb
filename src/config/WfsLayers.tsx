@@ -82,15 +82,29 @@ export const WFS_LAYERS = {
         }
     },
 
-    batas_kabupaten: {
-        title: 'Batas Kabupaten',
+    kepadatan_penduduk: {
+        title: 'Kepadatan Penduduk',
         url: 'http://localhost:8080/geoserver/digispatia/wfs',
-        typeName: 'digispatia:batas_kabupaten',
+        typeName: 'digispatia:kepadatan_penduduk',
 
         style: {
             color: 'transparent',
             weight: 1,
             fillOpacity: 0
+        },
+
+        getName: (props: any) => {
+            const nama =
+            props.wadmkc ||
+            props.namobj;
+
+            const kepadatan =
+            props.kepdukkm || props.kepadatan;
+
+            return `
+            <b>${nama || '-'}</b><br/>
+            Kepadatan: ${kepadatan || '-'} jiwa/km²
+            `;
         }
-    }
+    },
 }

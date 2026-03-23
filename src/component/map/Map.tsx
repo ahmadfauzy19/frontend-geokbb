@@ -32,6 +32,7 @@ const Map = ({ activeLayers, searchResult }: Props) => {
   const interactiveWMSRef = useRef<L.TileLayer.WMS[]>([]);
   const searchLayerRef = useRef<L.GeoJSON | null>(null);
   const wfsGroupRef = useRef<L.LayerGroup | null>(null);
+  const [showBasemapList, setShowBasemapList] = useState(false);
 
 
   const [basemap, setBasemap] = useState<BasemapKey>('osm');
@@ -74,6 +75,30 @@ const Map = ({ activeLayers, searchResult }: Props) => {
 
       /* ===== ZOOM ===== */
       L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+      /* ===== BASEMAP CONTROL MOBILE ===== */
+      class BasemapControl extends L.Control {
+        onAdd() {
+          const div = L.DomUtil.create('div', 'leaflet-bar basemap-control');
+
+          const button = L.DomUtil.create('a', '', div);
+          button.innerHTML = '🗺';
+          button.href = '#';
+          button.title = 'Basemap';
+
+          L.DomEvent.on(button, 'click', (e) => {
+            L.DomEvent.stopPropagation(e);
+            L.DomEvent.preventDefault(e);
+
+            const event = new CustomEvent('toggleBasemap');
+            window.dispatchEvent(event);
+          });
+
+          return div;
+        }
+      }
+
+      new BasemapControl({ position: 'bottomright' }).addTo(map);
 
       /* ===== DRAW ===== */
       const drawnItems = new L.FeatureGroup();
@@ -201,22 +226,37 @@ const Map = ({ activeLayers, searchResult }: Props) => {
     );
   }, [activeLayers]);
 
+  useEffect(() => {
+    const toggle = () => {
+      setShowBasemapList((prev) => !prev);
+    };
+
+    window.addEventListener("toggleBasemap", toggle);
+
+    return () => {
+      window.removeEventListener("toggleBasemap", toggle);
+    };
+  }, []);
+
   return (
     <>
       <div id="map" style={{ height: '100%', width: '100%' }} />
 
       {/* ===== BASEMAP PANEL ===== */}
-      <div className="basemap-panel">
+      <div className={`basemap-panel ${showBasemapList ? "open" : ""}`}>
         <div className="basemap-title">Basemap</div>
+
         <div className="basemap-list">
           {Object.values(BASEMAPS).map((bm) => (
             <button
               key={bm.name}
               className={`basemap-item ${
-                basemap === bm.name ? 'active' : ''
+                basemap === bm.name ? "active" : ""
               }`}
-              onClick={() => setBasemap(bm.name)}
-              title={bm.title}
+              onClick={() => {
+                setBasemap(bm.name);
+                setShowBasemapList(false);
+              }}
             >
               <img src={bm.image} alt={bm.title} />
             </button>

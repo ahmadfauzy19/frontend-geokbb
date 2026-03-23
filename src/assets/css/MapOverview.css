@@ -1,0 +1,206 @@
+/* ================= MAP OVERVIEW ================= */
+
+.map-overview {
+  width: 1000px;
+  height: 650px;
+  border-radius: 12px;
+  overflow: hidden;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+.overview-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+/* LEFT INFO */
+
+.info-left {
+  position: absolute;
+  left: 40px;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  z-index: 1010;
+}
+
+/* RIGHT INFO */
+
+.info-right {
+  position: absolute;
+  right: 120px;
+  top: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  z-index: 1000;
+}
+
+/* BUTTON BOX */
+
+.box-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* ACTIVE STATE */
+
+.box-info.active .info-box {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* INFO BOX */
+
+.info-box {
+  padding: 2px 7px;
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+}
+
+.info-box span {
+  font-size: 14px;
+}
+
+.info-box h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+/* COLORS */
+
+.green {
+  background: #3FD997;
+}
+
+.blue {
+  background: #3CACCC;
+}
+
+@media (max-width: 768px) {
+  /* Map Overview */
+  .map-overview {
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+  }
+
+}
+
+/* ================= RESPONSIVE MOBILE (480px) ================= */
+@media (max-width: 480px) {
+  /* Map Overview */
+  .map-overview {
+    /* width: 100%; */
+    height: 450px;
+    border-radius: 8px;
+    margin: 0 12px;
+    width: calc(100% - 24px);
+  }
+}
+
+/* ================= MOBILE NAVBAR OVERVIEW ================= */
+
+.overview-navbar{
+  display:none;
+}
+
+@media (max-width:768px){
+
+  /* sembunyikan desktop */
+  .info-left,
+  .info-right{
+    display:none;
+  }
+
+  .overview-navbar{
+    display:flex;
+    position:absolute;
+    top:10px;
+    left:10px;
+    right:10px;
+
+    justify-content:space-between;
+    gap:6px;
+
+    z-index:1200;
+  }
+
+  /* BUTTON */
+  .overview-navbar .box-info{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  padding:6px;
+  border-radius:20px;
+  backdrop-filter: blur(4px);
+  height: 35px;
+
+  transition:all .3s ease;
+}
+
+  /* ICON */
+.overview-navbar .icon{
+  font-size:20px;
+  width:24px;
+  height:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: white;
+}
+
+.overview-navbar .icon svg{
+  width:100%;
+  height:100%;
+}
+
+  /* default (inactive) */
+  .overview-navbar .box-info .label,
+  .overview-navbar .box-info .info-box{
+    display:none;
+  }
+  
+  /* ACTIVE BUTTON */
+  .overview-navbar .box-info.active{
+        flex:2;
+        padding:8px 10px;
+        background: transparent;
+        min-height: 60px;
+        transform: translateY(-10px);
+    }
+    .overview-navbar .box-info.active .icon{
+        display:none;
+    }
+    
+  .overview-navbar .box-info.active span{
+    display:block;
+    font-size:11px;
+    margin-top:2px;
+  }
+
+  .overview-navbar .box-info.active .info-box{
+    display:block;
+    margin-top:4px;
+    padding:4px 6px;
+    border-radius:12px;
+  }
+
+  .overview-navbar .box-info.active .info-box h3{
+    font-size:11px;
+  }
+
+}
