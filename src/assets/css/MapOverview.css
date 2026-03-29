@@ -48,7 +48,7 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
 }
 
 /* ACTIVE STATE */
@@ -85,6 +85,10 @@
 
 .blue {
   background: #3CACCC;
+}
+
+.leaflet-interactive:focus {
+  outline: none !important;
 }
 
 @media (max-width: 768px) {
@@ -201,6 +205,10 @@
 
   .overview-navbar .box-info.active .info-box h3{
     font-size:11px;
+  }
+
+  .hero-section-2 h1 {
+    font-size: 32px;
   }
 
 }

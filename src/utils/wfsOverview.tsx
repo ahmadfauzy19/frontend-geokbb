@@ -4,7 +4,13 @@ export const fetchWFS = async (url: string, typeName: string) => {
   const fullUrl = `${url}?service=WFS&version=1.0.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json`;
 
   const res = await fetch(fullUrl);
-  const data = await res.json();
+  const text = await res.text();
+
+    if (!text.startsWith('{')) {
+        console.error('Bukan JSON, kemungkinan error HTML:', text);
+    throw new Error('Response bukan JSON');
+    }
+  const data = await JSON.parse(text);
 
   return data;
 };

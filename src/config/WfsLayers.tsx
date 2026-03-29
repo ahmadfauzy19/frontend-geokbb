@@ -1,10 +1,11 @@
 import L from 'leaflet';
 import { ICONS } from '../utils/icons';
 
+const url = import.meta.env.VITE_GEOSERVER_URL_WFS;
 export const WFS_LAYERS = {
     sarana_peribadatan: {
         title: 'Sarana Peribadatan',
-        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        url: url,
         typeName: 'digispatia:sarana_peribadatan',
 
         pointToLayer: (feature: any, latlng: L.LatLng) => {
@@ -25,42 +26,42 @@ export const WFS_LAYERS = {
     },
     tpa: {
         title: 'TPA',
-        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        url: url,
         typeName: 'digispatia:tpa',
         pointToLayer : (_: any, latlng: L.LatLng) =>
             L.marker(latlng, { icon: ICONS.tpa }),
     },
     stasiun_kereta_api: {
         title: 'Stasiun Kereta Api',
-        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        url: url,
         typeName: 'digispatia:stasiun_kereta_api',
         pointToLayer : (_: any, latlng: L.LatLng) =>
             L.marker(latlng, { icon: ICONS.stasiun_kereta_api }),
     },
     terminal_bus: {
         title: 'Terminal Bus',
-        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        url: url,
         typeName: 'digispatia:terminal_bus',
         pointToLayer : (_: any, latlng: L.LatLng) =>
             L.marker(latlng, { icon: ICONS.terminal_bus }),
     },
     gardu_induk_listrik: {
         title: 'Gardu Induk Listrik',
-        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        url: url,
         typeName: 'digispatia:gardu_induk_listrik',
         pointToLayer : (_: any, latlng: L.LatLng) =>
             L.marker(latlng, { icon: ICONS.gardu_induk_listrik }),
     },
     pembangkit_listrik: {
         title: 'Pembangkit Listrik',
-        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        url: url,
         typeName: 'digispatia:pembangkit_listrik',
         pointToLayer : (_: any, latlng: L.LatLng) =>
             L.marker(latlng, { icon: ICONS.pembangkit_listrik }),
     },
     batas_desa: {
         title: 'Batas Desa',
-        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        url: url,
         typeName: 'digispatia:batas_desa',
 
         style: {
@@ -72,7 +73,7 @@ export const WFS_LAYERS = {
 
     batas_kecamatan: {
         title: 'Batas Kecamatan',
-        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        url: url,
         typeName: 'digispatia:batas_kecamatan',
 
         style: {
@@ -84,7 +85,7 @@ export const WFS_LAYERS = {
 
     kepadatan_penduduk: {
         title: 'Kepadatan Penduduk',
-        url: 'http://localhost:8080/geoserver/digispatia/wfs',
+        url: url,
         typeName: 'digispatia:kepadatan_penduduk',
 
         style: {
